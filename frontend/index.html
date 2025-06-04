@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ETH Voting DApp</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.8.1/dist/ethers.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.7.8/dist/umd/index.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-vote-yea"></i>
+        </div>
+        <h1>ETH Voting DApp</h1>
+      </div>
+      
+      <div class="wallet-actions">
+        <button class="btn-wallet" onclick="connectWallet()">
+          <i class="fab fa-metamask"></i> Connect MetaMask
+        </button>
+        <button class="btn-wallet" onclick="connectWalletConnect()">
+          <i class="fas fa-wallet"></i> Connect WalletConnect
+        </button>
+        <button class="theme-toggle" onclick="toggleTheme()">
+          <i class="fas fa-moon"></i> Dark Mode
+        </button>
+      </div>
+    </header>
+
+    <div class="card">
+      <h2><i class="fas fa-wallet"></i> Wallet Information</h2>
+      <div id="wallet-info">
+        <div class="empty-state">
+          <i class="fas fa-wallet"></i>
+          <h3>Connect your wallet to get started</h3>
+          <p>Please use one of the buttons above to connect your wallet</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><i class="fas fa-exchange-alt"></i> Transfer ETH</h2>
+      <div class="actions-grid">
+        <div>
+          <div class="form-group">
+            <label for="send-to">Recipient Address</label>
+            <input type="text" id="send-to" placeholder="0x..." />
+          </div>
+          <div class="form-group">
+            <label for="eth-amount">Amount (ETH)</label>
+            <input type="text" id="eth-amount" placeholder="0.01" />
+          </div>
+          <button class="btn-primary" onclick="sendETH()">
+            <i class="fas fa-paper-plane"></i> Send ETH
+          </button>
+        </div>
+        
+        <div>
+          <h3><i class="fas fa-vote-yea"></i> Vote on Proposals</h3>
+          <p>Select a proposal to vote on the Sepolia testnet:</p>
+          
+          <div class="proposals">
+            <div class="proposal-card" data-id="0" onclick="selectProposal(0)">
+              <h4>Proposal 1</h4>
+              <p>Ecosystem Development Fund</p>
+            </div>
+            <div class="proposal-card" data-id="1" onclick="selectProposal(1)">
+              <h4>Proposal 2</h4>
+              <p>Core Infrastructure Grants</p>
+            </div>
+          </div>
+          
+          <button class="btn-primary vote-btn" onclick="castVote()">
+            <i class="fas fa-check-circle"></i> Cast Vote
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><i class="fas fa-trophy"></i> Current Results</h2>
+      <div id="winner" class="empty-state">
+        <i class="fas fa-hourglass-half"></i>
+        <h3>No votes cast yet</h3>
+        <p>Votes will appear after voting</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><i class="fas fa-history"></i> Transaction History</h2>
+      <div class="tx-history-container">
+        <ul id="tx-history">
+          <li class="empty-state">
+            <i class="fas fa-clock"></i>
+            <h3>No transactions yet</h3>
+            <p>Your transactions will appear here</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="status"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
